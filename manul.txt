@@ -16,8 +16,8 @@ SYNOPSIS
 
 OPTIONS
     -b blockSiz100k
-        while compressing file, we need set the block size of BWT with blockSiz100k. you can set blockSiz100k with 1,2..9,
-        and the real BWT block size will be 100000,...900000 bytes. By default, we set the blockSiz100k 9.
+        while compressing file, we need set the block size of BWT with blockSiz100k. you can set blockSiz100k with 1,2..20,
+        and the real BWT block size will be 100000,...2000000 bytes. By default, we set the blockSiz100k 9.
     -c  
         let wzip works wtih compression state for compressing file
 
@@ -29,8 +29,8 @@ OPTIONS
         By default,we set the treeType 3.
 
     -g  nodeCode
-	    To select the code format of the wavelet tree node, like run-length gamma,run-length delta with nodeCode 1,2, separately.
-	    By default, we set the nodeCode 1.
+	To select the code format of the wavelet tree node, like run-length gamma,run-length delta ，light hybird with nodeCode 1,2,3 separately.
+	By default, we set the nodeCode 3.
 
     -f  
         force overwrite of output files. Normally, wzip will not overwrite existing output files. 
@@ -57,6 +57,5 @@ DESTRIPTON
     Its compression speed is much faster than bzip2 even in single-thread workstate ,and while in multi-thread workstate it will be more faster.
     
 AUTHOR
-     goldbeef (goldbeef@163.com) ,xidian university ,CHINA.
-      
+    sudent of Xidian University
 
