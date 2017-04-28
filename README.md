@@ -4,7 +4,9 @@
 编译器要求：g++4.8及以上.
 
 一 软件安装
+
 1.1	依赖库SAc的安装
+
 1)	下载地址：http://pizzachili.dcc.uchile.cl/indexes/Suffix_Array/
 2)	安装要求：支持C++11的编译器，比如g++4.9。
 3)	安装：
@@ -17,7 +19,9 @@
 6.	make                   //编译库文件
 7.	copy ds_ssort.a /home/**/hzip/  //将编译生成的库拷贝到压缩软件中
 注：在make之前，编译库是会出现‘CLK_TCK’未定义的错误，可以使用vim编辑器打开suftest2.c文件，在文件中添加#define CLK_TCK 1000，在其他库中查询知道CLK_TCK的值一般为1000，该值对我们使用库获取SA以及进行BWT变换无影响。添加完成后保存退出vim再进行make操作。
+
 1.2	hzip数据压缩软件的编译
+
 1)	下载地址：https://github.com/baiwenwu/hzip
 2)	编译：
 在终端中运行以下命令：
@@ -50,11 +54,14 @@
 
 三 补充说明
 该压缩软件使用的库为pizzachili中提供的标准库，但只能在32位机器下编译，所以安装过程中需要对环境进行设置，不然编译会出错。我们在下面提供其可以使用的64位库地址和其使用方法。
+
 3.1依赖库libdivsufsort的安装
+
 1)	地址：https://github.com/elventear/libdivsufsort 
 2)	安装要求：支持C++11的编译器，比如g++4.9。cmake进行编译安装。
 3)	安装：
 根据网址下载libdivsufsort库文件，然后进行如下命令操作：
+
 1	cd libdivsufsort
 2	mkdir build 
 3	cmake -DCMAKE_BUILD_TYPE="Release" -DCMAKE_INSTALL_PREFIX="/usr/local"
@@ -63,8 +70,11 @@
 6	make install
 7	cd lib
 8	cp libdivsufsort.so* /home/**/hzip/
+
 注：下载完成库之后，根据libdivsufsort文件中提供的install文件安装配置libdivsufsort库，第3行执行后会在build文件中生成一系列文件，其中包括makefile文件，然后进入build文件直接执行make，在huild文件中的lib文件下会生成我们需要库文件并将其拷贝到hzip文件夹下，完成后将libdivsufsort库文件下的include文件拷贝到hzip文件夹下面。
+
 3.2算法中需要做出的修改 
+
 将hzip文件夹下面引用#include "blocksort.h"的.c和.h文件进行修改，把#include "blocksort.h"改变成#include "./include/divsufsort.h"。
 将global.cpp中求取SA的函数以及BWT变换的函数接口用libdivsufsort库中提供的同样功能的函数接口替换即可，替换时注意参数个数以及参数类型。
 将Makefile文件中对于库函数的引用进行修改，将原来的-L. -lds_ssort替换成-L. –ldivsufsort，完成后即可直接执行make，使用压缩软件。
