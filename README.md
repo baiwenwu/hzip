@@ -1,7 +1,7 @@
 # hzip
 算法说明：
 
-该压缩算法是基于BWT变换、字符编码、小波树、以及基于游程编码的Elias Code编码和plain编码的混合编码实现的一种压缩算法，其在压缩率上的表现接近bzip2，个别数据表现比bzip2稍佳，压缩时间方面在优于rar、7z、gzip、zip、bzip2但是稍弱于compress（压缩率超越compress），解压缩时间方面比较耗时，与bzip2相当。
+hzip算法是参见[1,2]实现的基于bwt变化和小波树的wzip压缩算法之后，对小波树中的编码方式采用了混合编码方式，并加入了各种加速表结构，代码实现上使用了Wzip压缩算法，对其中有些方法和参数进行了修改。hzip中集合Wzip中的两种编码压缩方法，并加入了新的混合编码压缩方法，可以说是新版本的wzip压缩算法。
 
 算法实现作者：
 
@@ -93,4 +93,10 @@
 将hzip文件夹下面引用#include "blocksort.h"的.c和.h文件进行修改，把#include "blocksort.h"改变成#include "./include/divsufsort.h"。
 将global.cpp中求取SA的函数以及BWT变换的函数接口用libdivsufsort库中提供的同样功能的函数接口替换即可，替换时注意参数个数以及参数类型。
 将Makefile文件中对于库函数的引用进行修改，将原来的-L. -lds_ssort替换成-L. –ldivsufsort，完成后即可直接执行make，使用压缩软件。
+
+参考文献
+
+[1] 赵恒，基于BWT和小波树的数据压缩算法研究与实现，西安电子科技大学硕士论文，2014。导师：霍红卫。
+
+[2] Wzip, https://github.com/Hongweihuo-Lab/Wzip 
 
